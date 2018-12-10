@@ -38,28 +38,20 @@ var sortYourself = function (arr) {
   }
 };
 
-var correctingArray = function (players, times) {
+window.renderStatistics = function (ctx, players, times) {
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+  ctx.strokeStyle = 'hsla(230, 86%, 48%, 1)';
+  ctx.strokeRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
+
+  var maxTime = getMaxElement(times);
+  sortYourself(players);
+
   if ((players.length - times.length !== 0) && (players.length - times.length >= 0)) {
     times.push('0');
   } else if (times.length - players.length !== 0) {
     players.push('???');
   }
-};
-
-window.renderStatistics = function (ctx, players, times) {
-  // Рисуем тень
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-  // Рисуем окно
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
-  // Обводим окно
-  ctx.strokeStyle = 'hsla(230, 86%, 48%, 1)';
-  ctx.strokeRect(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
-
-  times = ['1200', '4300', '5500', '2500'];
-  var maxTime = getMaxElement(times);
-  sortYourself(players);
-  players = ['Вы', 'Гога', 'Рю'];
-  correctingArray(players, times);
 
   ctx.fillStyle = '#000';
   ctx.font = 'bold 16px PT Mono';
@@ -70,12 +62,6 @@ window.renderStatistics = function (ctx, players, times) {
   }
 
   for (var i = 0; i < players.length; i++) {
-    //   MAX_TIME      BAR[I]
-    // ----------- = --------
-    //  BAR_HEIGHT       X
-
-    //  X = (BAR_HEIGHT * BAR[I]) / MAX_TIME
-
     ctx.fillStyle = '#000';
     ctx.font = 'bold 16px PT Mono';
     ctx.textBaseline = 'hanging';
