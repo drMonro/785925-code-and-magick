@@ -72,8 +72,7 @@ for (var i = 0; i < WIZARDS_COUNT; i++) {
   RANDOM_WIZARDS[i] = generateRandomWizard(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 }
 for (var j = 0; j < RANDOM_WIZARDS.length; j++) {
-  var wizardFragment = generateWizardsFragment(RANDOM_WIZARDS[j], similarWizardTemplate);
-  fragment.appendChild(wizardFragment);
+  fragment.appendChild(generateWizardsFragment(RANDOM_WIZARDS[j], similarWizardTemplate));
 }
 similarListElement.appendChild(fragment);
 showHiddenBlock('.setup-similar');
