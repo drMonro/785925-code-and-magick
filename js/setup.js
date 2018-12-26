@@ -63,7 +63,7 @@ var generateWizardsFragment = function (wizards, wizardTemplate) {
   wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
-  fragment.appendChild(wizardElement);
+  return wizardElement;
 };
 
 
@@ -72,7 +72,8 @@ for (var i = 0; i < WIZARDS_COUNT; i++) {
   RANDOM_WIZARDS[i] = generateRandomWizard(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 }
 for (var j = 0; j < RANDOM_WIZARDS.length; j++) {
-  generateWizardsFragment(RANDOM_WIZARDS[j], similarWizardTemplate);
+  var wizardFragment = generateWizardsFragment(RANDOM_WIZARDS[j], similarWizardTemplate);
+  fragment.appendChild(wizardFragment);
 }
 similarListElement.appendChild(fragment);
 showHiddenBlock('.setup-similar');
