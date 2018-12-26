@@ -9,8 +9,7 @@ var NAMES = [
   'Юлия',
   'Люпита',
   'Вашингтон'];
-
-var SURNAMAES = [
+var SURNAMES = [
   'да Марья',
   'Верон',
   'Мирабелла',
@@ -19,7 +18,6 @@ var SURNAMAES = [
   'Топольницкая',
   'Нионго',
   'Ирвинг'];
-
 var COAT_COLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
@@ -27,15 +25,14 @@ var COAT_COLORS = [
   'rgb(56, 159, 117)',
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'];
-
 var EYES_COLORS = [
   'black',
   'red',
   'blue',
   'yellow',
   'green'];
-
 var RANDOM_WIZARDS = [];
+var WIZARDS_COUNT = 4;
 
 
 var showHiddenBlock = function (hiddenBlock) {
@@ -60,21 +57,22 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 var fragment = document.createDocumentFragment();
+
 var generateWizardsFragment = function (wizards, wizardTemplate) {
-  for (var i = 0; i < wizards.length; i++) {
-    var wizardElement = wizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizards[i].eyesColor;
-    fragment.appendChild(wizardElement);
-  }
-  similarListElement.appendChild(fragment);
+  var wizardElement = wizardTemplate.cloneNode(true);
+  wizardElement.querySelector('.setup-similar-label').textContent = wizards.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizards.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizards.eyesColor;
+  fragment.appendChild(wizardElement);
 };
 
 
 showHiddenBlock('.setup');
-for (var i = 0; i < 4; i++) {
-  RANDOM_WIZARDS[i] = generateRandomWizard(NAMES, SURNAMAES, COAT_COLORS, EYES_COLORS);
+for (var i = 0; i < WIZARDS_COUNT; i++) {
+  RANDOM_WIZARDS[i] = generateRandomWizard(NAMES, SURNAMES, COAT_COLORS, EYES_COLORS);
 }
-generateWizardsFragment(RANDOM_WIZARDS, similarWizardTemplate);
+for (var j = 0; j < RANDOM_WIZARDS.length; j++) {
+  generateWizardsFragment(RANDOM_WIZARDS[j], similarWizardTemplate);
+}
+similarListElement.appendChild(fragment);
 showHiddenBlock('.setup-similar');
