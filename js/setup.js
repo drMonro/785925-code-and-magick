@@ -23,12 +23,27 @@
   };
 
 
+  window.fireballSize = 20;
+  window.getFireballSpeed = function (left) {
+    return left ? 5 : 2;
+  };
+  window.wizardSpeed = 3;
+  window.wizardWidth = 70;
+  window.getWizardHeight = function () {
+    return 1.337 * window.wizardWidth;
+  };
+  window.getWizardX = function (width) {
+    return width / 2 - window.wizardWidth / 2;
+  };
+  window.getWizardY = function (height) {
+    return height * 2 / 3 - window.getWizardHeight();
+  };
+
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
   var fragment = document.createDocumentFragment();
-
 
   for (var i = 0; i < window.constants.WIZARDS_COUNT; i++) {
     window.constants.RANDOM_WIZARDS[i] = generateRandomWizard(window.constants.NAMES, window.constants.SURNAMES, window.constants.COAT_COLORS, window.constants.EYES_COLORS);
